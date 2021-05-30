@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+        #container {
+            align-content: center;
+            width: 1200px;
+            height: 600px;
+        }
+    </style>
+    <title>通过RequireJS加载</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/javascript">
+        window.init = function () {
+            var map = new AMap.Map('container', {
+                center: [117.000923, 36.675807],
+                zoom: 11
+            });
+            map.plugin('AMap.Weather', function () {
+            //创建天气查询实例
+            var weather = new AMap.Weather();
+
+            //执行实时天气信息查询
+            weather.getLive('杭州市', function (err, data) {
+                console.log(err, data);
+            });
+        });
+        }
+        
+    </script>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=d089871d03b7839e32cfbbc30810ca0f&callback=init"></script>
+
+</body>
+
+</html>
